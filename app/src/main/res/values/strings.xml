@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">HomeDashboard</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="new_text">New</string>
+    <string name="remove">Remove</string>
+    <string name="add">Add</string>
+    <string name="welcome">Welcome</string>
+    <string name="getting_started">Let\'s Get Started</string>
+    <string name="main_fragment_title">Koti</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="title_home">Home</string>
+
+    <string name="hello_main_fragment">Hello fragment</string>
+    <string name="title_activity_second">SecondActivity</string>
+
+    <!-- navigation drawer item labels  -->
+    <!--<string-array name="nav_drawer_labels">-->
+    <!--<item>@string/nav_item_home</item>-->
+    <!--<item>@string/nav_item_digit</item>-->
+    <!--<item>@string/nav_item_ebin</item>-->
+    <!--</string-array>-->
+</resources>
