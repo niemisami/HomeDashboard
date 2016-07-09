@@ -33,11 +33,7 @@ public class MainActivity extends AppCompatActivity {
         inflateFragments();
 
         mImmerseView = getWindow().getDecorView();
-
         mDetector = new GestureDetectorCompat(this, new ScreenTouchEventListener());
-        // Set the gesture detector as the double tap
-        // listener.
-
 
         hideSystemUI();
 

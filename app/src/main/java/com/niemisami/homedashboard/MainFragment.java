@@ -1,6 +1,7 @@
 package com.niemisami.homedashboard;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +19,6 @@ import android.widget.Toast;
 public class MainFragment extends Fragment {
 
     private static final String TAG = MainFragment.class.getSimpleName();
-
 
     private Button mStartButton;
 
@@ -31,9 +33,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-
         initViews(view);
-
         return view;
     }
 
@@ -72,4 +72,26 @@ public class MainFragment extends Fragment {
     }
 
 //    endregion
+
+
+    private static class WeatherFetcherTask extends AsyncTask<Void, Void, JSONObject> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+        }
+
+        @Override
+        protected JSONObject doInBackground(Void... params) {
+            WeatherHandler weatherHandler =  new WeatherHandler();
+            weatherHandler.setLocation(new WeatherLocation("Finland", "Turku"));
+            return weatherHandler.fetchOneDayForecast();
+        }
+    }
 }

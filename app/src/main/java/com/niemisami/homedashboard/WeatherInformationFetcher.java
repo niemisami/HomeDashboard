@@ -24,23 +24,32 @@ public class WeatherInformationFetcher {
 
     public WeatherInformationFetcher() {
         mClient = new OkHttpClient();
-        mApiKey = MainActivity.W_API_KEY;
+//        mApiKey = MainActivity.W_API_KEY;
+        mApiKey = "8861b174b6889499";
     }
 
-    public void setmApiKey(String apiKey) {
+    public void setApiKey(String apiKey) {
         mApiKey = apiKey;
     }
     public void setLocation(WeatherLocation location) {
         mLocation = location.getCountry() + '/' + location.getCity();
     }
 
-    public String fetchOneDayForecast() throws IOException {
-        mApiMethod = "hourly";
+    public void setApiMethod(String apiMethod) {
+        mApiMethod = apiMethod;
+    }
+
+    public String fetchForecast() throws IOException, NullPointerException{
+        if (mApiMethod == null || mLocation == null || mApiKey == null) {
+            throw new NullPointerException();
+        }
         buildRequestUrl();
         System.out.println(mUrl);
         return fetchWeatherInformation();
 
     }
+
+
 
     private String buildRequestUrl() {
         return mUrl = WUNDERGROUND_BASE_URL + mApiKey + "/" + mApiMethod + "/q/" + mLocation + ".json";

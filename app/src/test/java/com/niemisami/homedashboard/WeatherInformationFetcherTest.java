@@ -1,7 +1,5 @@
 package com.niemisami.homedashboard;
 
-import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,10 +20,5 @@ public class WeatherInformationFetcherTest{
         fetcher.setLocation(location);
     }
 
-    @Test
-    public void testFetchOneDayForecast() throws Exception {
-        fetcher.setmApiKey("8861b174b6889499");
-        String result = fetcher.fetchOneDayForecast();
-        assertEquals("x", result);
-    }
+
 }
