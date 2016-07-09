@@ -3,9 +3,7 @@ package com.niemisami.homedashboard;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,13 +13,23 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    public static String W_API_KEY;
     private View mImmerseView;
     private GestureDetectorCompat mDetector;
+
+
+    /**
+     * Store Wunderground Api key to config.xml file and ignore it from version control
+     */
+    private void getWApiKey() {
+        W_API_KEY = getResources().getString(R.string.w_api_key);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
+        getWApiKey();
         inflateFragments();
 
         mImmerseView = getWindow().getDecorView();

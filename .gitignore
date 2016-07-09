@@ -37,3 +37,6 @@ build/
 
 # maven
 target/
+
+# Api keys
+app/src/main/res/values/config.xml

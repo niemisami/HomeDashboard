@@ -1,58 +1,66 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/margin_dashboard"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/margin_dashboard">
 
     <include
         android:id="@+id/title_view"
         layout="@layout/title_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <include
         android:id="@+id/temperature_view"
         layout="@layout/temperature_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@id/title_view"/>
+        android:layout_alignBottom="@id/title_view"
+        android:layout_alignParentEnd="true" />
 
     <include
         android:id="@+id/clock_view"
         layout="@layout/clock_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/temperature_view"
+        android:layout_alignBottom="@id/title_view"
         android:layout_marginEnd="@dimen/margin_medium"
-        android:layout_alignBottom="@id/title_view"/>
+        android:layout_toStartOf="@id/temperature_view" />
 
-    <include
-        android:id="@+id/date_view"
-        layout="@layout/date_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title_view"
-        android:layout_alignParentBottom="true"
-        />
     <include
         android:id="@+id/forecast_view"
         layout="@layout/forecast_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <include
+        android:id="@+id/date_view"
+        layout="@layout/date_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/forecast_view"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/title_view" />
+
+    <include
+        android:id="@+id/message_view"
+        layout="@layout/message_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/forecast_view"
         android:layout_alignParentEnd="true"
-        />
+        android:layout_below="@id/title_view" />
 
 
     <Button
-        android:visibility="gone"
         android:id="@+id/button_start"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
-        android:text="@string/getting_started" />
+        android:text="@string/getting_started"
+        android:visibility="gone" />
 </RelativeLayout>

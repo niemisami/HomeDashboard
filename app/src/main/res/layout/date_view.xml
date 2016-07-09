@@ -8,11 +8,19 @@
         android:id="@+id/date_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:fontFamily="sans-serif-light"
-        android:text="Tiistai"
         android:gravity="center_horizontal"
+        android:text="Tiistai"
         android:textColor="@color/white"
         android:textSize="@dimen/text_dashboard_item" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/calendar_events_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/date_text"
+        android:layout_below="@id/date_text">
+
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
