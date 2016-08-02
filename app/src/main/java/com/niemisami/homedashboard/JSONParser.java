@@ -1,5 +1,8 @@
 package com.niemisami.homedashboard;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by sami on 7/9/16.
  */
@@ -32,4 +35,13 @@ public class JSONParser {
     *    22	Chace of Ice Pellets
     *    23	Ice Pellets
     *    24	Blizzard	*/
+
+    public static JSONObject parseStringToJSON(String jsonString) {
+        try {
+            return new JSONObject(jsonString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return new JSONObject();
+        }
+    }
 }

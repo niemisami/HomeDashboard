@@ -25,8 +25,11 @@ public class WeatherHandler {
     }
 
     public JSONObject fetchOneDayForecast() {
-        mWeatherInformationFetcher.setApiMethod("hourly");
+        mWeatherInformationFetcher.setApiMethod("hourly10days");
+        return fetchForecastAsJSON();
+    }
 
+    private JSONObject fetchForecastAsJSON() {
         String response = "";
         try {
             response = mWeatherInformationFetcher.fetchForecast();
@@ -40,12 +43,6 @@ public class WeatherHandler {
     }
 
     private JSONObject parseResponseToJSON(String response) {
-        try {
-            return new JSONObject(response);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return new JSONObject();
-        }
-
+        return JSONParser.parseStringToJSON(response);
     }
 }

@@ -1,28 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-
-    <ImageView
-        android:id="@+id/weather_icon"
-        android:layout_width="@dimen/icon"
-        android:layout_height="@dimen/icon"
-        android:src="@drawable/weather_icon"
-        android:layout_centerHorizontal="true"/>
-
-
-    <TextView
-        android:id="@+id/date_text"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/forecast_recycler_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:fontFamily="sans-serif-light"
-        android:text="06 - 09 - 12 - 15 - 18 - 21 - 00"
-        android:gravity="center_horizontal"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_dashboard_item"
-        android:layout_below="@id/weather_icon"/>
+        android:layout_height="wrap_content">
 
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>
