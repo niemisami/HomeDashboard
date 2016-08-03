@@ -16,7 +16,7 @@ public class ForecastItemViewHolder extends RecyclerView.ViewHolder {
         mForecastItemView = forecastItemView;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         mForecastItemView.setTime(time);
     }
 

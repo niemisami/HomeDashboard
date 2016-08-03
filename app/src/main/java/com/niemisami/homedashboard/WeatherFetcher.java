@@ -2,7 +2,6 @@ package com.niemisami.homedashboard;
 
 import android.util.Log;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -10,12 +9,12 @@ import java.io.IOException;
 /**
  * Created by sami on 7/9/16.
  */
-public class WeatherHandler {
+public class WeatherFetcher {
 
-    private static final String TAG = WeatherHandler.class.getSimpleName();
+    private static final String TAG = WeatherFetcher.class.getSimpleName();
     private WeatherInformationFetcher mWeatherInformationFetcher;
 
-    public WeatherHandler() {
+    public WeatherFetcher() {
         mWeatherInformationFetcher = new WeatherInformationFetcher();
 
     }
@@ -25,7 +24,7 @@ public class WeatherHandler {
     }
 
     public JSONObject fetchOneDayForecast() {
-        mWeatherInformationFetcher.setApiMethod("hourly10days");
+        mWeatherInformationFetcher.setApiMethod("hourly10day");
         return fetchForecastAsJSON();
     }
 

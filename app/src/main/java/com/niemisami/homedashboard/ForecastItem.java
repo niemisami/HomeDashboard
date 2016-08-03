@@ -5,14 +5,13 @@ package com.niemisami.homedashboard;
  */
 public class ForecastItem {
 
-    private int mIconId, mTemperature;
-    private String mTime;
+    private int mIconId, mTemperature, mTime;
 
-    public ForecastItem(int iconId, String time) {
+    public ForecastItem(int iconId, int time) {
         this(iconId, time, 0);
     }
 
-    public ForecastItem(int iconId, String time, int temperature) {
+    public ForecastItem(int iconId, int time, int temperature) {
         mIconId = iconId;
         mTime = time;
         mTemperature = temperature;
@@ -23,12 +22,17 @@ public class ForecastItem {
         return mIconId;
     }
 
-    public String getTime() {
+    public int getTime() {
         return mTime;
     }
 
     public int getTemperature() {
         return mTemperature;
+    }
+
+    @Override
+    public String toString() {
+        return "time: " + mTime + " icon id: " + mIconId + " temperature: " + mTemperature;
     }
 }
 

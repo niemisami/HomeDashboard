@@ -43,8 +43,8 @@ public class ForecastItemView extends LinearLayout{
         setGravity(Gravity.CENTER);
     }
 
-    public void setTime(String time) {
-        mTimeView.setText(time);
+    public void setTime(int time) {
+        mTimeView.setText(Integer.toString(time));
     }
     public void setIconId(int iconId) {
         mWeatherIconView.setImageLevel(iconId);

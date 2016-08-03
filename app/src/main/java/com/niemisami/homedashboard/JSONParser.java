@@ -1,5 +1,6 @@
 package com.niemisami.homedashboard;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,6 +9,8 @@ import org.json.JSONObject;
  */
 public class JSONParser {
 
+    private static final String TAG = JSONParser.class.getSimpleName();
+    public static final String TAG_HOURLY_FORECAST = "hourly_forecast";
 
     /*
     * fctcode 	Forecast: https://nihongo.wunderground.com/weather/api/d/docs?d=resources/phrase-glossary
@@ -32,7 +35,7 @@ public class JSONParser {
     *    19	Snow Showers
     *    20	Chance of Snow
     *    21	Snow
-    *    22	Chace of Ice Pellets
+    *    22	Chance of Ice Pellets
     *    23	Ice Pellets
     *    24	Blizzard	*/
 
@@ -43,5 +46,25 @@ public class JSONParser {
             e.printStackTrace();
             return new JSONObject();
         }
+    }
+
+    public static ForecastItem[] parseJSONObjectToForecastItems(JSONObject jsonObject) throws JSONException {
+        JSONArray forecastJSONs = parseJSONObjectToArray(TAG_HOURLY_FORECAST, jsonObject);
+        ForecastItem[] forecastItems = new ForecastItem[forecastJSONs.length()];
+        for (int i = 0; i<forecastJSONs.length(); i++) {
+            forecastItems[i] = getForecastInformation(forecastJSONs.getJSONObject(i));
+        }
+        return forecastItems;
+    }
+
+    public static ForecastItem getForecastInformation(JSONObject jsonObject) throws JSONException {
+        int hour = jsonObject.getJSONObject("FCTTIME").getInt("hour");
+        int temperature = jsonObject.getJSONObject("temp").getInt("metric");
+        int fctcode = jsonObject.getInt("fctcode");
+        return new ForecastItem(fctcode, hour, temperature);
+    }
+
+    public static JSONArray parseJSONObjectToArray(String tag, JSONObject jsonObject) throws JSONException {
+        return jsonObject.getJSONArray(tag);
     }
 }

@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -55,13 +57,12 @@ public class MainFragment extends Fragment {
 
 
     private void initViews(View view) {
-
         initForecastRecyclerView(view);
     }
 
     private void initForecastRecyclerView(View view) {
 
-        mForecastItems = new ForecastItem[]{new ForecastItem(0, "12"), new ForecastItem(1, "15"), new ForecastItem(2, "21"), new ForecastItem(3, "00"), new ForecastItem(4, "03"), new ForecastItem(5, "06")};
+        mForecastItems = new ForecastItem[]{new ForecastItem(0, 12), new ForecastItem(1, 15), new ForecastItem(2, 21), new ForecastItem(3, 00), new ForecastItem(4, 03), new ForecastItem(5, 06)};
 
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.forecast_recycler_view);
@@ -116,9 +117,35 @@ public class MainFragment extends Fragment {
 
         @Override
         protected JSONObject doInBackground(Void... params) {
-            WeatherHandler weatherHandler = new WeatherHandler();
-            weatherHandler.setLocation(new WeatherLocation("Finland", "Turku"));
-            return weatherHandler.fetchOneDayForecast();
+            WeatherFetcher weatherFetcher = new WeatherFetcher();
+            weatherFetcher.setLocation(new WeatherLocation("Finland", "Turku"));
+            return weatherFetcher.fetchOneDayForecast();
+        }
+    }
+
+    private class WeatherResponseParserTask extends AsyncTask<JSONObject, Void, ForecastItem[]> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected void onPostExecute(ForecastItem[] items) {
+            mForecastItems = items;
+        }
+
+        @Override
+        protected ForecastItem[] doInBackground(JSONObject... params) {
+            try {
+                return JSONParser.parseJSONObjectToForecastItems(params[0]);
+            } catch (JSONException e) {
+                Toast.makeText(getActivity().getApplicationContext(), "Error parsing forecast", Toast.LENGTH_SHORT)
+                        .show();
+                Log.e(TAG, "doInBackground: ", e);
+            }
+            return  new ForecastItem[0];
         }
     }
 }
