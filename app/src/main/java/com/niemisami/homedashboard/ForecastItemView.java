@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,7 +45,8 @@ public class ForecastItemView extends LinearLayout{
     }
 
     public void setTime(int time) {
-        mTimeView.setText(Integer.toString(time));
+        String formattedTime = String.format("%02d%n", time);
+        mTimeView.setText(formattedTime);
     }
     public void setIconId(int iconId) {
         mWeatherIconView.setImageLevel(iconId);

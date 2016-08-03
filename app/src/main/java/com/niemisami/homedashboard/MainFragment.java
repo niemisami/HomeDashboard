@@ -41,7 +41,7 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         initViews(view);
 
-        if (mWundergroundWeatherForecast == null) {
+        if (mForecastItems.length == 0) {
             new WeatherFetcherTask().execute();
         } else {
             Log.d(TAG, "onPostExecute: " + mWundergroundWeatherForecast.toString());
@@ -52,7 +52,6 @@ public class MainFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private ForecastItem[] mForecastItems;
 
 
@@ -62,24 +61,22 @@ public class MainFragment extends Fragment {
 
     private void initForecastRecyclerView(View view) {
 
-        mForecastItems = new ForecastItem[]{new ForecastItem(0, 12), new ForecastItem(1, 15), new ForecastItem(2, 21), new ForecastItem(3, 00), new ForecastItem(4, 03), new ForecastItem(5, 06)};
+//        mForecastItems = new ForecastItem[]{new ForecastItem(0, 12), new ForecastItem(1, 15), new ForecastItem(2, 21), new ForecastItem(3, 00), new ForecastItem(4, 03), new ForecastItem(5, 06)};
 
+        Log.d(TAG, "initForecastRecyclerView: ");
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.forecast_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mAdapter = new ForecastItemAdapter(mForecastItems);
-
-
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setRetainInstance(true);
+        mForecastItems = new ForecastItem[]{};
+        mAdapter = new ForecastItemAdapter(getActivity());
         super.onCreate(savedInstanceState);
 
     }
@@ -113,6 +110,7 @@ public class MainFragment extends Fragment {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             mWundergroundWeatherForecast = jsonObject;
+            new WeatherResponseParserTask().execute(mWundergroundWeatherForecast);
         }
 
         @Override
@@ -128,12 +126,14 @@ public class MainFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override
         protected void onPostExecute(ForecastItem[] items) {
+//            mForecastItems = new ForecastItem[6];
+//            System.arraycopy(items, 0, mForecastItems, 0, 6);
             mForecastItems = items;
+            refreshForecastView();
         }
 
         @Override
@@ -145,7 +145,13 @@ public class MainFragment extends Fragment {
                         .show();
                 Log.e(TAG, "doInBackground: ", e);
             }
-            return  new ForecastItem[0];
+
+            return new ForecastItem[0];
         }
+    }
+
+    private void refreshForecastView() {
+        Log.d(TAG, "refreshForecastView: ");
+        ((ForecastItemAdapter) mAdapter).setForecastItems(mForecastItems);
     }
 }
